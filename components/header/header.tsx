@@ -1,243 +1,314 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
+/*
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+*/
+import { Fragment, useState } from "react";
+import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
-  AnnotationIcon,
-  ChatAlt2Icon,
-  ChatAltIcon,
-  DocumentReportIcon,
-  HeartIcon,
-  InboxIcon,
   MenuIcon,
-  PencilAltIcon,
-  QuestionMarkCircleIcon,
-  ReplyIcon,
-  SparklesIcon,
-  TrashIcon,
-  UsersIcon,
   PhoneIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  UserIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 
-const solutions = [
-  {
-    name: "Inbox",
-    description:
-      "Get a better understanding of where your traffic is coming from.",
-    href: "#",
-    icon: InboxIcon,
-  },
-  {
-    name: "Messaging",
-    description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
-    icon: AnnotationIcon,
-  },
-  {
-    name: "Live Chat",
-    description: "Your customers' data will be safe and secure.",
-    href: "#",
-    icon: ChatAlt2Icon,
-  },
-  {
-    name: "Knowledge Base",
-    description: "Connect with third-party tools that you're already using.",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-  },
-];
+const currencies = ["CAD", "USD", "AUD", "EUR", "GBP"];
+const navigation = {
+  categories: [
+    {
+      name: "Options",
+      about: [{ name: "Meet Dr Theisen", href: "#" }],
+      services: [
+        { name: "General Dentistry", href: "#" },
+        { name: "Family Dentistry", href: "#" },
+        { name: "Dental Crowns", href: "#" },
+        { name: "Dental Bridges", href: "#" },
+        { name: "Veneers", href: "#" },
+        { name: "Teeth Whitening", href: "#" },
+        { name: "Cosmetic Dentistry", href: "#" },
+        { name: "Sleep Dentistry", href: "#" },
+      ],
+    },
+  ],
+};
 
-export default function Header() {
-  function classNames(...classes: any) {
-    return classes.filter(Boolean).join(" ");
-  }
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function Example() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <header>
-      <Popover className="relative bg-white">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
-              <span className="sr-only">Workflow</span>
-              <p>Dental Arts of Erie </p>
-            </a>
-          </div>
-          <div className="flex flex-row items-center -mr-2 -my-2 md:hidden">
-          <a href="tel:8145556789">
-            <PhoneIcon className="w-6 h-6 mr-4 " />
-            </a>
-            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <span className="sr-only">Open menu</span>
+    <header className="relative">
+      <nav aria-label="Top">
+        <div className="bg-white mt-2 mb-4 mx-8">
+          {/* Mobile menu */}
+          <Transition.Root show={open} as={Fragment}>
+            <Dialog as="div" className="relative z-40 " onClose={setOpen}>
+              <Transition.Child
+                as={Fragment}
+                enter="transition-opacity ease-linear duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity ease-linear duration-300"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black bg-opacity-50" />
+              </Transition.Child>
 
-              <MenuIcon className="h-6 w-6" aria-hidden="true" />
-            </Popover.Button>
-          </div>
-          <Popover.Group as="nav" className="hidden md:flex space-x-10">
-            <Popover className="relative">
-              {({ open }) => (
-                <>
-                  <Popover.Button
-                    className={classNames(
-                      open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    )}
-                  >
-                    <span>Solutions</span>
-                    <ChevronDownIcon
-                      className={classNames(
-                        open ? "text-gray-600" : "text-gray-400",
-                        "ml-2 h-5 w-5 group-hover:text-gray-500"
-                      )}
-                      aria-hidden="true"
-                    />
-                  </Popover.Button>
-
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="opacity-0 translate-y-1"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 translate-y-1"
-                  >
-                    <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
-                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                        <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                          {solutions.map((item) => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                            >
-                              <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12">
-                                <item.icon
-                                  className="h-6 w-6"
-                                  aria-hidden="true"
-                                />
-                              </div>
-                              <div className="ml-4">
-                                <p className="text-base font-medium text-gray-900">
-                                  {item.name}
-                                </p>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </Popover.Panel>
-                  </Transition>
-                </>
-              )}
-            </Popover>
-
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Pricing
-            </a>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
-            >
-              Partners
-            </a>
-            <a href="tel:814-555-5678" className="absolute right-8 flex flex-row">
-              <PhoneIcon className="h-6 w-6 mr-2 text-base font-medium text-gray-500 hover:text-gray-900" />
-              <span>814-555-5678</span>
-            </a>
-          </Popover.Group>
-        </div>
-
-        <Transition
-          as={Fragment}
-          enter="duration-200 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-100 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
-        >
-          <Popover.Panel
-            focus
-            className="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-          >
-            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-              <div className="pt-5 pb-6 px-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                  <p>Dental Arts of Erie </p>
-                  </div>
-                  <div className="-mr-2">
-                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                      <span className="sr-only">Close menu</span>
-                      <XIcon className="h-6 w-6" aria-hidden="true" />
-                    </Popover.Button>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <nav className="grid grid-cols-1 gap-7">
-                    {solutions.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
+              <div className="fixed inset-0 flex z-40">
+                <Transition.Child
+                  as={Fragment}
+                  enter="transition ease-in-out duration-300 transform"
+                  enterFrom="-translate-x-full"
+                  enterTo="translate-x-0"
+                  leave="transition ease-in-out duration-300 transform"
+                  leaveFrom="translate-x-0"
+                  leaveTo="-translate-x-full"
+                >
+                  <Dialog.Panel className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
+                    <div className="px-4 pt-5 pb-2 flex">
+                      <button
+                        type="button"
+                        className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                        onClick={() => setOpen(false)}
                       >
-                        <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                          <item.icon className="h-6 w-6" aria-hidden="true" />
-                        </div>
-                        <div className="ml-4 text-base font-medium text-gray-900">
-                          {item.name}
-                        </div>
-                      </a>
-                    ))}
-                  </nav>
-                </div>
+                        <span className="sr-only">Close menu</span>
+                        <XIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    </div>
+
+                    {/* Links */}
+                    <Tab.Group as="div" className="mt-2">
+                      <Tab.Panels as={Fragment}>
+                        {navigation.categories.map((category, categoryIdx) => (
+                          <Tab.Panel
+                            key={category.name}
+                            className="px-4 pt-10 pb-6 space-y-12"
+                          >
+                            <div className="grid grid-cols-1 items-start gap-y-10 gap-x-6">
+                              <div className="grid grid-cols-1 gap-y-10 gap-x-6">
+                                <div>
+                                  <p
+                                    id={`mobile-featured-heading-${categoryIdx}`}
+                                    className="font-medium text-gray-900"
+                                  >
+                                    About
+                                  </p>
+                                  <ul
+                                    role="list"
+                                    aria-labelledby={`mobile-featured-heading-${categoryIdx}`}
+                                    className="mt-6 space-y-6"
+                                  >
+                                    {category.about.map((item) => (
+                                      <li key={item.name} className="flex">
+                                        <a
+                                          href={item.href}
+                                          className="text-gray-500"
+                                        >
+                                          {item.name}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                                <div>
+                                  <p
+                                    id="mobile-categories-heading"
+                                    className="font-medium text-gray-900"
+                                  >
+                                    Services
+                                  </p>
+                                  <ul
+                                    role="list"
+                                    aria-labelledby="mobile-categories-heading"
+                                    className="mt-6 space-y-6"
+                                  >
+                                    {category.services.map((item) => (
+                                      <li key={item.name} className="flex">
+                                        <a
+                                          href={item.href}
+                                          className="text-gray-500"
+                                        >
+                                          {item.name}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </Tab.Panel>
+                        ))}
+                      </Tab.Panels>
+                    </Tab.Group>
+                  </Dialog.Panel>
+                </Transition.Child>
               </div>
-              <div className="py-6 px-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <a
-                    href="#"
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    Pricing
-                  </a>
-                  <a
-                    href="#"
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    Partners
-                  </a>
-                  <a
-                    href="#"
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
-                  >
-                    Company
-                  </a>
-                </div>
-                <div className="mt-6">
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700"
-                  >
-                    Sign up
-                  </a>
-                  <p className="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?
-                    <a href="#" className="text-gray-900">
-                      Sign in
-                    </a>
-                  </p>
+            </Dialog>
+          </Transition.Root>
+
+          {/*   <div className="bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="border-b border-gray-200">
+                <div className="h-16 flex items-center justify-between">
+                  <div className="hidden h-full lg:flex">
+
+                    <Popover.Group className="ml-8">
+                      <div className="h-full flex justify-center space-x-8">
+                        {navigation.categories.map((category, categoryIdx) => (
+                          <Popover key={category.name} className="hidden ">
+                            {({ open }) => (
+                              <>
+                                <div className="relative flex">
+                                  <Popover.Button
+                                    className={classNames(
+                                      open
+                                        ? "border-indigo-600 text-indigo-600"
+                                        : "border-transparent text-gray-700 hover:text-gray-800",
+                                      "relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
+                                    )}
+                                  >
+                                    {category.name}
+                                  </Popover.Button>
+                                </div>
+
+                                <Transition
+                                  as={Fragment}
+                                  enter="transition ease-out duration-200"
+                                  enterFrom="opacity-0"
+                                  enterTo="opacity-100"
+                                  leave="transition ease-in duration-150"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
+                                >
+                                  <Popover.Panel className="absolute top-full inset-x-0 text-gray-500 sm:text-sm">
+
+                                    <div
+                                      className="absolute inset-0 top-1/2 bg-white shadow"
+                                      aria-hidden="true"
+                                    />
+
+                                    <div className="relative bg-white">
+                                      <div className="max-w-7xl mx-auto px-8">
+                                        <div className="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
+                                          <div className="grid grid-cols-2 gap-y-10 gap-x-8">
+                                            <div>
+                                              <p
+                                                id={`desktop-featured-heading-${categoryIdx}`}
+                                                className="font-medium text-gray-900"
+                                              >
+                                                About
+                                              </p>
+                                              <ul
+                                                role="list"
+                                                aria-labelledby={`desktop-featured-heading-${categoryIdx}`}
+                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                              >
+                                                {category.about.map((item) => (
+                                                  <li
+                                                    key={item.name}
+                                                    className="flex"
+                                                  >
+                                                    <a
+                                                      href={item.href}
+                                                      className="hover:text-gray-800"
+                                                    >
+                                                      {item.name}
+                                                    </a>
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            </div>
+                                            <div>
+                                              <p
+                                                id="desktop-categories-heading"
+                                                className="font-medium text-gray-900"
+                                              >
+                                                Services
+                                              </p>
+                                              <ul
+                                                role="list"
+                                                aria-labelledby="desktop-categories-heading"
+                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                              >
+                                                {category.services.map(
+                                                  (item) => (
+                                                    <li
+                                                      key={item.name}
+                                                      className="flex"
+                                                    >
+                                                      <a
+                                                        href={item.href}
+                                                        className="hover:text-gray-800"
+                                                      >
+                                                        {item.name}
+                                                      </a>
+                                                    </li>
+                                                  )
+                                                )}
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Popover.Panel>
+                                </Transition>
+                              </>
+                            )}
+                          </Popover>
+                        ))}
+                      </div>
+                    </Popover.Group>
+                  </div>
+
+
                 </div>
               </div>
             </div>
-          </Popover.Panel>
-        </Transition>
-      </Popover>
+          </div> */}
+          <div className="flex flex-row items-center">
+          <div className="flex-1 flex  items-center">
+            <button
+              type="button"
+              className="-ml-2 bg-white p-2 rounded-md text-gray-400"
+              onClick={() => setOpen(true)}
+            >
+              <span className="sr-only">Open menu</span>
+              <MenuIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+
+            <a href="#" className="ml-2 p-2 ">
+              <span className="sr-only">Logo</span>
+              <span>Dental Arts of Erie</span>
+            </a>
+          </div>
+
+          <div className="flex flex-row">
+            <PhoneIcon className="h-6 w-6 mr-2" />
+            <a href="tel:8145556789">
+              <p>814-555-6789</p>
+            </a>
+          </div>
+          </div>
+        </div>
+      </nav>
     </header>
   );
 }
