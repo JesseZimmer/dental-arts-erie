@@ -20,52 +20,44 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 
 const features = [
   {
-    name: "Unlimited Inboxes",
+    name: "General Dentistry",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: InboxIcon,
   },
   {
-    name: "Manage Team Members",
+    name: "Family Dentistry",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: UsersIcon,
   },
   {
-    name: "Spam Report",
+    name: "Dental Crowns",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: TrashIcon,
   },
   {
-    name: "Compose in Markdown",
+    name: "Dental Bridges",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: PencilAltIcon,
   },
   {
-    name: "Team Reporting",
+    name: "Vaneers",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: DocumentReportIcon,
   },
   {
-    name: "Saved Replies",
+    name: "Teeth Whitening",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: ReplyIcon,
   },
   {
-    name: "Email Commenting",
+    name: "Cosmetic Dentistry",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: ChatAltIcon,
   },
   {
-    name: "Connect with Customers",
+    name: "Sleep Dentistry",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    icon: HeartIcon,
   },
 ];
 const metrics = [
@@ -180,7 +172,7 @@ export default function Example() {
             className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100"
           />
           <div className="relative">
-            <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
+            <div className="lg:mx-auto lg:max-w-7xl lg:px-8 ">
               <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
                 <div>
 
@@ -199,7 +191,7 @@ export default function Example() {
         <div className="bg-gradient-to-r from-purple-800 to-indigo-700">
           <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8">
             <h2 className="text-3xl font-extrabold text-white tracking-tight">
-              Inbox support built for efficiency
+              Comprehensive Dental Services
             </h2>
             <p className="mt-4 max-w-3xl text-lg text-purple-200">
               Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et
@@ -210,12 +202,6 @@ export default function Example() {
               {features.map((feature) => (
                 <div key={feature.name}>
                   <div>
-                    <span className="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-10">
-                      <feature.icon
-                        className="h-6 w-6 text-white"
-                        aria-hidden="true"
-                      />
-                    </span>
                   </div>
                   <div className="mt-6">
                     <h3 className="text-lg font-medium text-white">
