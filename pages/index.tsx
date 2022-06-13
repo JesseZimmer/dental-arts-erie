@@ -177,8 +177,8 @@ export default function Example() {
                 <div>
 
                   <div className="mt-6">
-                    <p className="mt-4 text-lg text-gray-500">
-                    Dental Arts of Erie is a state of the art dental practice located at 4330 Peach Street. Dr. Timothy Theisen offers a unique dental experience for patients. He is dedicated to providing comprehensive dental care at an affordable cost. Our office offers a comfortable, modern atmosphere and a welcoming staff dedicated to providing the best quality care to our patients.
+                    <p className="mt-4 text-xl  text-gray-500">
+                    <span className="font-semibold text-2xl">Dental Arts of Erie</span> is a state of the art dental practice located at 4330 Peach Street. Dr. Timothy Theisen offers a unique dental experience for patients. He is dedicated to providing comprehensive dental care at an affordable cost. Our office offers a comfortable, modern atmosphere and a welcoming staff dedicated to providing the best quality care to our patients.
                     </p>
                   </div>
                 </div>
